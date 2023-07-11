@@ -1,0 +1,58 @@
+{% extends 'Notepad/base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+{% if request.get_full_path == '/Notepad/' %}
+  <h1> Home Page</h1>
+  <h1>SignUp then Login </h1>
+<!-- Instead of this notepad.html is used -->
+<!--      {% if request.get_full_path == '/Notepad/' and user.is_authenticated %}-->
+<!--      Notepad App starts here finallyyyyy!!!!!!-->
+<!--      {% endif %}-->
+
+{% elif request.get_full_path == '/Notepad/Signup/' %}
+<h1> Signup Form</h1>
+<div class="container" >
+<form action="OTP/" method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" name='username' placeholder="Enter a Username" aria-describedby="userHelp" required>
+    <div id="userHelp" class="form-text">Username should be <b>UNIQUE</b></div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Enter a Password" aria-describedby="passHelp" required>
+    <div id="passHelp" class="form-text">Enter a <b>STRONG</b> Password</div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter a Email ID" required>
+  </div>
+  <div class="input-group">
+  <input type="file" class="form-control mt-2" id="image" name="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+  </div>
+  <div id="inputGroupFileAddon04" class="form-text mb-2">Enter your profile picture (Not mandatory)</div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+{% elif request.get_full_path == '/Notepad/Login/' %}
+<h1> Login Form</h1>
+<div class="container">
+<form action="Login_verify/" method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="user" class="form-label">Username</label>
+    <input type="text" class="form-control" id="user" name='user' placeholder="Enter a Username" required>
+  </div>
+  <div class="mb-3">
+    <label for="pass" class="form-label">Password</label>
+    <input type="pass" class="form-control" id="pass" name="pass" placeholder="Enter a Password" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endif %}
+{% endblock body %}

@@ -1,0 +1,65 @@
+{% extends 'Notepad/notepad_base.html' %}
+{% block title %}Write Note{% endblock title %}
+{% block style %}
+    #back{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    #text_1{
+        resize:none;
+        width: 100vw;
+        height: 10vh;
+        font-size:2rem;
+        justify-content: center;
+        display: flex;
+
+    }
+    #text_2 {
+        resize:none;
+        width: 100vw;
+        height: 90vh;
+        font-size:2rem;
+
+    }
+    body{
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+    }
+{% endblock style %}
+{% block script %}
+<!--    <script src="https://cdn.tiny.cloud/1/{YOUR_API_KEY}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>-->
+<!--    <script>-->
+<!--    tinymce.init({-->
+<!--    selector: '#text_2',-->
+<!--    plugins: 'advlist autolink lists link image charmap print preview',-->
+<!--    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',-->
+<!--    height: 500-->
+<!--    });-->
+<!--</script>-->
+{% endblock script %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav" style="width:99vw; justify-content:space-between;}">
+          <li class="nav-item">
+            <a class="nav-link active mx-3" aria-current="page" href="/Notepad/notepad/"><b>Home</b></a>
+          </li>
+          <li class="nav-item">
+            <form action="/Notepad/notepad/new_note/write_note/save_note/" method="post">
+              {% csrf_token %}
+              <button class="btn btn-outline-success nav-link active px-3 mx-3" type="submit"><b>Save</b></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div id="back">
+        <input type="hidden" name="note_id" value="{{db_note.note_id}}">
+        <textarea id="text_1" name="txt_1" placeholder="Heading" required>{{db_note.Title}}</textarea>
+        <textarea id="text_2" name="txt_2" placeholder="Text-Area" required>{{db_note.Text}}</textarea>
+    </div>
+</form>
+{% endblock body %}
